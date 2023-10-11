@@ -24,7 +24,7 @@ int _f_ok(char *cmd, char **environ)
 		return (1);
 	}
 	cmd_len = strlen(cmd);
-	token = strtok(path, ":");
+	token = _strtok(path, ":");
 
 	while (token != NULL)
 	{
@@ -45,7 +45,7 @@ int _f_ok(char *cmd, char **environ)
 			return (0);
 		}
 		free(executable);
-		token = strtok(NULL, ":");
+		token = _strtok(NULL, ":");
 
 	}
 	perror("access");
