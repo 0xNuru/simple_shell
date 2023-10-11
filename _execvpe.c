@@ -1,3 +1,5 @@
+#include "shell.h"
+
 /**
 * _execvpe - a function that the current process image
 * with a new process image
@@ -10,10 +12,6 @@
 * Return: The exec() functions return only if an error has occurred.
 * The return value is -1, and errno is set to indicate the error.
 */
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
 
 int _execvpe(const char *cmd, char *argv[], char *const envp[])
 {
@@ -51,7 +49,7 @@ int _execvpe(const char *cmd, char *argv[], char *const envp[])
 		execve(executable, argv, envp);
 
 		/* if the code reaches here, it means execve failed, try next path */
-		token = _strtok(NULL, ":";
+		token = _strtok(NULL, ":");
 	}
 	/* if the code reaches here, that means we have exhausted path */
 	free(executable);

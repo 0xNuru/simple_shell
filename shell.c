@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,7 +17,7 @@ while(1)
 	token = NULL;
 	input_len = 0;
 	printf("($) ");
-	bytes_read = _getline(&input, &input_len, stdin);
+	bytes_read = getline(&input, &input_len, stdin);
 	if (bytes_read == -1)
 	{
 		if (feof(stdin))
@@ -27,7 +27,7 @@ while(1)
 		}
 		else
 		{
-			perror("_getline");
+			perror("getline");
 			free(input);
 			exit(EXIT_FAILURE);
 		}
@@ -36,9 +36,11 @@ while(1)
 	if (input[bytes_read - 1] == '\n')
 		input[bytes_read - 1] = '\0';
 
-	if (strcmp(input, "exit") == 0)
+	if ((__exit(input)) == 1)
 		break;
-		
+	
+	__env(input);
+	
 	token = _strtok(input, " ");
 	
 	if (token == NULL)
@@ -60,16 +62,19 @@ while(1)
 
 		if (t_count >= 64)
 		{
-			args = _realloc(args, sizeof(char *) * 64);
+			args = realloc(args, sizeof(char *) * t_count * 2);
 			if (args == NULL)
 			{
-				perror("_realloc");
+				perror("realloc");
 				exit(EXIT_FAILURE);
 			}
 		}
 	
 	}
 	args[t_count] = NULL;
+	
+	if (_f_ok(args[0], environ) != 0)
+		continue;
 
 	pid = fork();
 
