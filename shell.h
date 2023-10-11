@@ -20,6 +20,8 @@ char *_strchr(char *s, char c);
 int _strcmp(char *s1, char *s2);
 void *_realloc(void *ptr, size_t new_size);
 int _f_ok(char *cmd, char **environ);
+int __exit(char *input);
+int __env(char *input);
 
 
 #endif
