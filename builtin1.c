@@ -9,15 +9,28 @@
 
 int __exit(char *input)
 {
-	char *token1, *token2, *inputcpy;
+	char *inputcpy, **args;
+	long int status;
+	int token_status;
 
 	inputcpy = strdup(input);
-	token1 = _strtok(inputcpy, " ");
-	token2 = _strtok(NULL, " ");
+	args = parse_input(inputcpy, &token_status);
+	if (token_status == 1)
+		return (0);
 
-	if ((strcmp(token1, "exit") == 0) && (token2 == NULL))
-		return (1);
-	
+	if (strcmp(args[0], "exit") == 0)
+	{	
+		if (args[1] == NULL)
+			exit(EXIT_SUCCESS);
+
+		if (args[2] != NULL)
+		{
+			printf("Usage: exit status\n");
+			return (0);
+		}
+		status = atoi(args[1]);
+		exit(status);
+	}
 	return (0);
 }
 
@@ -31,12 +44,11 @@ int __exit(char *input)
 int __env(char *input)
 {
 	char *token1, *token2, *inputcpy;
-	extern char **environ;
 	char **env = environ;
-	
+
 	inputcpy = strdup(input);
-	token1 = _strtok(inputcpy, " ");
-	token2 = _strtok(NULL, " ");
+	token1 = strtok(inputcpy, " ");
+	token2 = strtok(NULL, " ");
 
 	if ((strcmp(token1, "env") == 0) && (token2 == NULL))
 	{

@@ -12,6 +12,8 @@
 #include <signal.h>
 #include <fcntl.h>
 
+extern char **environ;
+
 int _execvpe(const char *cmd, char *argv[], char *const envp[]);
 char *_strtok(char *input, const char *delim);
 ssize_t _getline(char **lineptr, size_t *alloc_size, FILE *input);
@@ -22,6 +24,8 @@ int _f_ok(char *cmd, char **environ);
 int __exit(char *input);
 int __env(char *input);
 int _strlen(char *s);
+char *read_input(int *eof_status);
+char **parse_input(char *input, int *token_status);
 
 
 

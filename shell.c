@@ -1,86 +1,45 @@
 #include "shell.h"
 
+/**
+* main - simple shell program
+* @argc: the number of arguments
+* @argv: the arguments vector
+*
+* Description: an implementation of a simple shell CLI
+* Return: 0 (success)
+*/
+
 int main(int argc, char *argv[])
 {
-size_t bytes_read, input_len;
-char *input;
+char *input, **args;
 pid_t pid;
-extern char **environ;
-int status;
-char **args;
-char *token;
-int t_count;
+int status, token_status, eof_status = 0;
 
-while(1)
+while (1)
 {
-	t_count = 0;
-	token = NULL;
-	input_len = 0;
 	printf("($) ");
-	bytes_read = getline(&input, &input_len, stdin);
-	if (bytes_read == -1)
-	{
-		if (feof(stdin))
-		{
-			printf("\n");
-			break;
-		}
-		else
-		{
-			perror("getline");
-			free(input);
-			exit(EXIT_FAILURE);
-		}
-	}
-	
-	if (input[bytes_read - 1] == '\n')
-		input[bytes_read - 1] = '\0';
+	input = read_input(&eof_status);
 
-	if ((__exit(input)) == 1)
+	if (eof_status == 1)
 		break;
+
+
+	args = parse_input(input, &token_status);
 	
-	__env(input);
-	
-	token = _strtok(input, " ");
-	
-	if (token == NULL)
+
+	if (token_status == 1)
 		continue;
-	
-	args = malloc(sizeof(char *) * 64);
-	
-	if (args == NULL)
-	{
-		perror("malloc");
-		exit(EXIT_FAILURE);
-	}
 
-	args[t_count++] = token;
+	__exit(input);
+        __env(input);
 
-	while ((token = _strtok(NULL, " ")))
-	{
-		args[t_count++] = token;
-
-		if (t_count >= 64)
-		{
-			args = realloc(args, sizeof(char *) * t_count * 2);
-			if (args == NULL)
-			{
-				perror("realloc");
-				exit(EXIT_FAILURE);
-			}
-		}
-	
-	}
-	args[t_count] = NULL;
-	
 	if (_f_ok(args[0], environ) != 0)
 		continue;
 
 	pid = fork();
-
 	if (pid == 0)
 	{
-		_execvpe(args[0], args, environ);	
+		_execvpe(args[0], args, environ);
 		perror("execve");
 		free(args);
 		exit(EXIT_FAILURE);
@@ -88,13 +47,9 @@ while(1)
 	else
 	{
 		waitpid(pid, &status, 0);
-		/*if (WIFEXITED(status))
-			printf("Success exit status: %d", WEXITSTATUS(status));
-		else
-			printf("exited abnormally");*/
 	}
 	free(args);
 }
 free(input);
-return(0);
+return (0);
 }
