@@ -61,9 +61,13 @@ bytes_read = fgetc(input);
     /*  Store the character read in the buffer and increment the tracker */
     (*lineptr)[tracker++] = (char)bytes_read;
 
+    /* Check for consecutive black new lines */
+    if (tracker > 1 && (*lineptr)[tracker - 1] == '\n' && (*lineptr)[tracker - 2] == '\n')
+	return (0);
+
     if (bytes_read == delim) 
     {
-        (lineptr)[tracker - 1] = '\0'; /* Exclude the newline character */
+        (*lineptr)[tracker - 1] = '\0'; /* Exclude the newline character */
         return (tracker); /* Line read successfully, excluding null terminator */
     }
 }
