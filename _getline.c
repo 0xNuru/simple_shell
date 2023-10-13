@@ -32,7 +32,7 @@ if (*lineptr == NULL || *alloc_size == 0)
 }
 while (1) 
 {
-bytes_read = fgetc(input);
+bytes_read = _fgetc(input);
 
     if (bytes_read == EOF) 
     {

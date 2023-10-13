@@ -22,7 +22,7 @@ int _f_ok(char *cmd, char **environ);
 int __exit(char *input);
 int __env(char *input);
 int _strlen(char *s);
-
+int _fgetc(FILE *stream);
 
 
 
