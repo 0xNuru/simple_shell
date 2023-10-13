@@ -23,6 +23,9 @@ int __exit(char *input);
 int __env(char *input);
 int _strlen(char *s);
 int _fgetc(FILE *stream);
+char *_fgets(char *s, int n, FILE *stream);
+
+
 
 
 
