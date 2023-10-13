@@ -14,7 +14,7 @@ char *read_input(int *eof_status)
 
 	input_len = 0;
 	*eof_status = 0;
-	bytes_read = getline(&input, &input_len, stdin);
+	bytes_read = _getline(&input, &input_len, stdin);
 	if (bytes_read == -1)
 	{
 		if (feof(stdin))
@@ -24,7 +24,7 @@ char *read_input(int *eof_status)
 		}
 		else
 		{
-			perror("getline");
+			perror("_getline");
 			free(input);
 			exit(EXIT_FAILURE);
 		}

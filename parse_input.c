@@ -39,7 +39,7 @@ char **parse_input(char *input, int *token_status)
 
 		if (t_count >= 64)
 		{
-			args = realloc(args, sizeof(char *) * t_count * 2);
+			args = _realloc(args, sizeof(char *) * t_count * 2);
 			if (args == NULL)
 			{
 				perror("realloc");

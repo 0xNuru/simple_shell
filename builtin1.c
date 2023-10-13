@@ -18,7 +18,7 @@ int __exit(char *input)
 	if (token_status == 1)
 		return (0);
 
-	if (strcmp(args[0], "exit") == 0)
+	if (_strcmp(args[0], "exit") == 0)
 	{	
 		if (args[1] == NULL)
 			exit(EXIT_SUCCESS);
@@ -47,10 +47,10 @@ int __env(char *input)
 	char **env = environ;
 
 	inputcpy = strdup(input);
-	token1 = strtok(inputcpy, " ");
-	token2 = strtok(NULL, " ");
+	token1 = _strtok(inputcpy, " ");
+	token2 = _strtok(NULL, " ");
 
-	if ((strcmp(token1, "env") == 0) && (token2 == NULL))
+	if ((_strcmp(token1, "env") == 0) && (token2 == NULL))
 	{
 		while (*env)
 		{

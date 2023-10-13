@@ -25,7 +25,7 @@ int _execvpe(const char *cmd, char *argv[], char *const envp[])
 		perror("getenv");
 		exit(EXIT_FAILURE);
 	}
-	cmd_len = strlen(cmd);
+	cmd_len = _strlen(cmd);
 	/* path is a colon separated str, tokenize each str */
 	token = _strtok(path, ":");
 
@@ -34,7 +34,7 @@ int _execvpe(const char *cmd, char *argv[], char *const envp[])
 		/* try executing cmd without path */
 		execve(cmd, argv, envp);
 
-		token_len = strlen(token);
+		token_len = _strlen(token);
 		/* merge path with cmd */
 		e_len = (token_len + cmd_len + 2) * sizeof(char);
 		executable = malloc((e_len) * sizeof(char));

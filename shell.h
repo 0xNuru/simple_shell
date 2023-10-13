@@ -15,17 +15,17 @@
 int _execvpe(const char *cmd, char *argv[], char *const envp[]);
 char *_strtok(char *input, const char *delim);
 ssize_t _getline(char **lineptr, size_t *alloc_size, FILE *input);
-char *_strchr(char *s, char c);
-int _strcmp(char *s1, char *s2);
+const char *_strchr(const char *s, int c);
+int _strcmp(const char *s1, char *s2);
 void *_realloc(void *ptr, size_t new_size);
 int _f_ok(char *cmd, char **environ);
 int __exit(char *input);
 int __env(char *input);
-int _strlen(char *s);
+int _strlen(const char *s);
 int _fgetc(FILE *stream);
 char *_fgets(char *s, int n, FILE *stream);
-
-
+char *read_input(int *eof_status);
+char **parse_input(char *input, int *token_status);
 
 
 

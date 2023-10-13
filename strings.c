@@ -9,7 +9,7 @@
  * less than, greater than, or equal to s2.
  */
 
-int _strcmp(char *s1, char *s2)
+int _strcmp(const char *s1, char *s2)
 {
 while (*s1 != '\0' && *s1 == *s2)
 {
@@ -29,7 +29,7 @@ return (*s1 - *s2);
  * Return: Length of the string.
  */
 
-int _strlen(char *s)
+int _strlen(const char *s)
 {
 int length;
 
@@ -52,10 +52,10 @@ return (length);
  * @c: Character to be found
  *
  * Return: Pointer to the first occurrence of c in
- * s, or 0 for unfound characters
+ * s, or NULL for unfound characters
  */
 
-char *_strchr(char *s, char c)
+const char *_strchr(const char *s, int c)
 {
 while (*s != '\0')
 {
@@ -68,6 +68,6 @@ while (*s != '\0')
 if (c == '\0')
         return (s);
 
-return (0);
+return (NULL);
 }
 
