@@ -17,7 +17,7 @@ if (input != NULL)
 	tracker = input; /* Initialize tracker to input string */
 
 /* Check if tracker is NULL or points to a delimiter at the start of the string */
-while ((tracker != NULL) && (strchr(delim, *tracker) != NULL) && (*tracker != '\0'))
+while ((tracker != NULL) && (_strchr(delim, *tracker) != NULL) && (*tracker != '\0'))
 	tracker++;
 /* Start saving the current token */
 token = tracker;
