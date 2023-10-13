@@ -27,7 +27,7 @@ if (lineptr == NULL || alloc_size == NULL || input == NULL)
 if (*lineptr == NULL || *alloc_size == 0) 
 {
     *alloc_size = BUFFSIZE; /* Set initial buffer size to BUFFSIZE */
-    if ((*lineptr = (char *)malloc((int)*alloc_size)) == NULL) 
+    if ((*lineptr = (char *)malloc(*alloc_size)) == NULL) 
         return (-1); /* Failed allocation */
 }
 while (1) 
