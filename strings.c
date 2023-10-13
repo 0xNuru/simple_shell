@@ -11,12 +11,10 @@
 
 int _strcmp(char *s1, char *s2)
 {
-for (; *s1 != '\0' && *s1 == *s2; s1++, s2++)
+while (*s1 != '\0' && *s1 == *s2)
 {
-	/*
-	 * Continues the loop until the strings are different
-	 * or until the end of the strings
-	 */
+	s1++;
+	s2++;
 }
 return (*s1 - *s2);
 }
@@ -33,11 +31,15 @@ return (*s1 - *s2);
 
 int _strlen(char *s)
 {
-int length = 0;
-int a;
-for (a = 0; s[a] != '\0'; a++)
+int length;
 
+length = 0;
+
+while (*s != '\0')
+{
 	length++;
+	s++;
+}
 return (length);
 }
 
@@ -55,15 +57,17 @@ return (length);
 
 char *_strchr(char *s, char c)
 {
-    while (*s != '\0')
-    {
-        if (*s == c)
-            return (s);
-        s++;
-    }
-
-    if (c == '\0')
+while (*s != '\0')
+{
+	if (*s == c)
+	{
+		return (s);
+	}
+	s++;
+}
+if (c == '\0')
         return (s);
-    return (0);
+
+return (0);
 }
 
