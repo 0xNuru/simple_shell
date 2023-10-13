@@ -67,7 +67,7 @@ bytes_read = fgetc(input);
 
     if (bytes_read == delim) 
     {
-        (*lineptr)[tracker - 1] = '\0'; /* Exclude the newline character */
+        (*lineptr)[tracker] = '\0'; /* Exclude the newline character */
         return (tracker); /* Line read successfully, excluding null terminator */
     }
 }
