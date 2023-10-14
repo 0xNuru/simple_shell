@@ -28,7 +28,7 @@ int _fgetc(FILE *stream);
 char *_fgets(char *s, int n, FILE *stream);
 char *read_input(int *eof_status);
 char **parse_input(char *input, int *token_status);
-
+int is_setenv(char *input);
 
 
 

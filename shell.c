@@ -30,8 +30,14 @@ while (1)
 	if (token_status == 1)
 		continue;
 
-	__exit(input);
-        __env(input);
+	if (__exit(input) != 0)
+		continue;
+
+       if (__env(input) == 0)
+	       continue;
+
+	if (is_setenv(input) != 0)
+		continue;
 
 	if (_f_ok(args[0], environ) != 0)
 		continue;
