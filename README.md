@@ -1,5 +1,5 @@
 # Simple shell project
-
+![Gates of Shell](https://s3.amazonaws.com/intranet-projects-files/holbertonschool-low_level_programming/235/shell.jpeg)
 This is a simple implementation of a Unix-like shell in C.
 
 ## Requirements
