@@ -31,6 +31,7 @@ char *read_input(int *eof_status);
 char **parse_input(char *input, int *token_status);
 int is_setenv(char *input);
 int _putenv(char *name_value);
+int is_builtin(char *input);
 
 
 #endif
