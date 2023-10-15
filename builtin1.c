@@ -157,3 +157,58 @@ int is_setenv(char *input)
 	}
 	return (0);
 }
+
+
+
+/**
+* main - entry point
+* @n: number..
+*
+* Description: a function that prints the alphabet
+* Return: 0 (success)
+*/
+
+/*int _putenv(char *name value)
+{
+	
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

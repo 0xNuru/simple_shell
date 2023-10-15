@@ -20,7 +20,7 @@ char **parse_input(char *input, int *token_status)
 	*token_status = 0;
 	inputcpy = strdup(input);
 
-	token = _strtok(inputcpy, " ");
+	token = _strtok(inputcpy, " \t\r\n\a");
 	if (token == NULL)
 		*token_status = 1;
 
@@ -33,7 +33,7 @@ char **parse_input(char *input, int *token_status)
 
 	args[t_count++] = token;
 
-	while ((token = _strtok(NULL, " ")))
+	while ((token = _strtok(NULL, " \t\r\n\a")))
 	{
 		args[t_count++] = token;
 
