@@ -9,7 +9,7 @@
 
 int __exit(char *input)
 {
-	char *inputcpy, **args;
+	char *inputcpy, **args, *error;
 	long int status;
 	int token_status;
 
@@ -24,14 +24,16 @@ int __exit(char *input)
 			exit(EXIT_SUCCESS);
 
 		if (args[2] != NULL)
-		{
-			printf("Usage: exit status\n");
+		{	
+			error = "usage: exit status\n";
+			write(2, error, strlen(error));
 			return (1);
 		}
 		status = atoi(args[1]);
 		if (status == 0 && _strcmp(args[1], "0") != 0)
 		{
-			perror("invalid exit status");
+			error = "invalid exit status\n";
+			write(2, error, strlen(error));
 			return (1);
 		}
 		exit(status);
