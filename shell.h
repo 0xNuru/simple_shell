@@ -1,8 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#define BUFFSIZE 1024
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,6 +9,9 @@
 #include <sys/wait.h>
 #include <signal.h>
 #include <fcntl.h>
+
+#define BUFFSIZE 1024
+#define TOKEN_DELIM " \t\r\n\a"
 
 extern char **environ;
 
@@ -29,7 +30,7 @@ char *_fgets(char *s, int n, FILE *stream);
 char *read_input(int *eof_status);
 char **parse_input(char *input, int *token_status);
 int is_setenv(char *input);
-
+int _putenv(char *name_value);
 
 
 #endif

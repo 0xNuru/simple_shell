@@ -24,7 +24,7 @@ int __exit(char *input)
 			exit(EXIT_SUCCESS);
 
 		if (args[2] != NULL)
-		{	
+		{
 			error = "usage: exit status\n";
 			write(2, error, strlen(error));
 			return (1);
@@ -65,7 +65,7 @@ int __env(char *input)
 			printf("%s\n", *env);
 			env++;
 		}
-		return(0);
+		return (0);
 	}
 	return (1);
 }
@@ -111,7 +111,7 @@ int _setenv(const char *name, const char *value, int overwrite)
 	sprintf(env_name_value, "%s=%s", name, value);
 
 	/* call putenv and save the return value in putenv_status  */
-	putenv_status = putenv(env_name_value);
+	putenv_status = _putenv(env_name_value);
 	/* Error handling: */
 	if (putenv_status != 0)
 	{
@@ -132,7 +132,7 @@ int _setenv(const char *name, const char *value, int overwrite)
 
 int is_setenv(char *input)
 {
-	char *inputcpy, **args;
+	char *inputcpy, **args, *error;
 	int token_status;
 
 	inputcpy = strdup(input);
@@ -144,13 +144,15 @@ int is_setenv(char *input)
 	{
 		if (args[1] == NULL || args[2] == NULL)
 		{
-			perror("Usage: setenv VARIABLE VALUE");
+			error = "usage: setenv VARIABLE VALUE\n";
+			write(2, error, strlen(error));
 			return (98);
 		}
 
 		if (_setenv(args[1], args[2], 1) == -1)
 		{
-			perror("setenv");
+			error = "setenv failed\n";
+			write(2, error, strlen(error));
 			return (98);
 		}
 		return (99);
@@ -161,54 +163,38 @@ int is_setenv(char *input)
 
 
 /**
-* main - entry point
-* @n: number..
+* _putenv - a function that replicates the putenv function
+* @name_value: a string in the format NAME="VALUE" to be added to env
 *
 * Description: a function that prints the alphabet
 * Return: 0 (success)
 */
 
-/*int _putenv(char *name value)
+int _putenv(char *name_value)
 {
-	
-}*/
+	int env_len = 0, i;
+	char **new_environ;
 
+	/* find length of environment array */
+	while (environ[env_len])
+		env_len++;
 
+	/* allocate memory for new environ */
+	new_environ = malloc((env_len + 2) * sizeof(char *));
+	if (new_environ == NULL)
+	{
+		perror("malloc");
+		return (-1);
+	}
 
+	/* copy old environ to new_environ */
+	for (i = 0; i < env_len; i++)
+		new_environ[i] = strdup(environ[i]);
 
+	new_environ[env_len] = strdup(name_value);
+	new_environ[env_len + 1] = NULL;
 
+	environ = new_environ;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	return (0);
+}

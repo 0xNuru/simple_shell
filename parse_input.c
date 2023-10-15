@@ -20,7 +20,7 @@ char **parse_input(char *input, int *token_status)
 	*token_status = 0;
 	inputcpy = strdup(input);
 
-	token = _strtok(inputcpy, " \t\r\n\a");
+	token = _strtok(inputcpy, TOKEN_DELIM);
 	if (token == NULL)
 		*token_status = 1;
 
@@ -30,10 +30,9 @@ char **parse_input(char *input, int *token_status)
 		perror("malloc");
 		exit(EXIT_FAILURE);
 	}
-
 	args[t_count++] = token;
 
-	while ((token = _strtok(NULL, " \t\r\n\a")))
+	while ((token = _strtok(NULL, TOKEN_DELIM)))
 	{
 		args[t_count++] = token;
 
@@ -48,7 +47,6 @@ char **parse_input(char *input, int *token_status)
 		}
 	}
 	 args[t_count] = NULL;
-
 	return (args);
 
 }

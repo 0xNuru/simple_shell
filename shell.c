@@ -22,26 +22,18 @@ while (1)
 
 	if (eof_status == 1)
 		break;
-
-
 	args = parse_input(input, &token_status);
-	
 
 	if (token_status == 1)
 		continue;
-
 	if (__exit(input) != 0)
 		continue;
-
-       if (__env(input) == 0)
-	       continue;
-
+	if (__env(input) == 0)
+		continue;
 	if (is_setenv(input) != 0)
 		continue;
-
 	if (_f_ok(args[0], environ) != 0)
 		continue;
-
 	pid = fork();
 	if (pid == 0)
 	{
