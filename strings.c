@@ -71,3 +71,61 @@ if (c == '\0')
 return (NULL);
 }
 
+
+
+
+
+
+
+
+/**
+ * _strcpy - Copies the string pointed to by src to dest.
+ * @dest: Pointer to the destination buffer.
+ * @src: Pointer to the source string.
+ *
+ * Return: Pointer to dest.
+ */
+
+char *_strcpy(char *dest, const char *src)
+{
+char *initial_dest = dest;
+
+while ((*dest = *src) != '\0')
+{
+	dest++;
+	src++;
+}
+return (initial_dest);
+}
+
+
+
+
+
+
+
+
+
+/**
+ * _strdup - Duplicates a string
+ * @s: String to be duplicated
+ *
+ * Return: Pointer to the duplicated string
+ * or NULL for failed memory allocation
+ */
+
+char *_strdup(const char *s)
+{
+if (s == NULL)
+	return (NULL);
+
+int length = strlen(s) + 1;
+char *duplicate = (char *)malloc(length);
+
+if (duplicate == NULL)
+	return (NULL);
+
+strcpy(duplicate, s);
+
+return (duplicate);
+}

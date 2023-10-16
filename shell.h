@@ -32,6 +32,11 @@ char **parse_input(char *input, int *token_status);
 int is_setenv(char *input);
 int _putenv(char *name_value);
 int is_builtin(char *input);
+char *_strcpy(char *dest, const char *src);
+char *_strdup(const char *s);
+
+
+
 
 
 #endif
