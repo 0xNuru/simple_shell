@@ -132,19 +132,17 @@ int _setenv(const char *name, const char *value, int overwrite)
 
 int is_setenv(char *input)
 {
-	char *inputcpy, **args, *error;
+	char *inputcpy, **args, *error = "usage: setenv VARIABLE VALUE\n";
 	int token_status;
 
 	inputcpy = strdup(input);
 	args = parse_input(inputcpy, &token_status);
 	if (token_status == 1)
 		return (0);
-
 	if (_strcmp(args[0], "setenv") == 0)
 	{
 		if (args[1] == NULL || args[2] == NULL || args[3] != NULL)
 		{
-			error = "usage: setenv VARIABLE VALUE\n";
 			write(2, error, strlen(error));
 			return (98);
 		}
@@ -177,7 +175,6 @@ int is_setenv(char *input)
 }
 
 
-
 /**
 * _putenv - a function that replicates the putenv function
 * @name_value: a string in the format NAME="VALUE" to be added to env
@@ -195,7 +192,10 @@ int _putenv(char *name_value)
 	while (environ[env_len])
 		env_len++;
 
-	/* allocate memory for new environ (+2 because of null pointer and new environ var*/
+	/**
+	 * allocate memory for new environ (+2 because of null pointer
+	 * and new environ var
+	 */
 	new_environ = malloc((env_len + 2) * sizeof(char *));
 	if (new_environ == NULL)
 	{
