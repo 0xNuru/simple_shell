@@ -9,7 +9,7 @@
 * Return: 0 (success)
 */
 
-int main(int argc, char *argv[])
+int main(void)
 {
 char *input, **args;
 pid_t pid;
@@ -29,7 +29,7 @@ while (1)
 	if (is_builtin(input) == 99)
 		continue;
 
-	if (_f_ok(args[0], environ) != 0)
+	if (_f_ok(args[0]) != 0)
 		continue;
 
 	pid = fork();
@@ -46,6 +46,6 @@ while (1)
 	}
 	free(args);
 }
-free(input);
+/*free(input);*/
 return (0);
 }

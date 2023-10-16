@@ -9,7 +9,7 @@
 */
 
 
-int _f_ok(char *cmd, char **environ)
+int _f_ok(char *cmd)
 {
 	size_t token_len, e_len, cmd_len;
 	char *path, *token, *executable;

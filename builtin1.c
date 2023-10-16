@@ -96,7 +96,7 @@ int _setenv(const char *name, const char *value, int overwrite)
 		return (-1);
 
 	/* if env var already exitst and overwrite is false */
-	if (getenv(name) != NULL && overwrite != 0)
+	if (_getenv(name) != NULL && overwrite != 0)
 		return (0);
 
 
@@ -142,7 +142,7 @@ int is_setenv(char *input)
 
 	if (_strcmp(args[0], "setenv") == 0)
 	{
-		if (args[1] == NULL || args[2] == NULL)
+		if (args[1] == NULL || args[2] == NULL || args[3] != NULL)
 		{
 			error = "usage: setenv VARIABLE VALUE\n";
 			write(2, error, strlen(error));
@@ -152,6 +152,22 @@ int is_setenv(char *input)
 		if (_setenv(args[1], args[2], 1) == -1)
 		{
 			error = "setenv failed\n";
+			write(2, error, strlen(error));
+			return (98);
+		}
+		return (99);
+	}
+	if (_strcmp(args[0], "unsetenv") == 0)
+	{
+		if (args[1] == NULL || args[3] != NULL)
+		{
+			error = "usage: unsetenv VARIABLE\n";
+			write(2, error, strlen(error));
+			return (98);
+		}
+		if (_unsetenv(args[1]) == -1)
+		{
+			error = "unsetenv failed\n";
 			write(2, error, strlen(error));
 			return (98);
 		}
@@ -179,7 +195,7 @@ int _putenv(char *name_value)
 	while (environ[env_len])
 		env_len++;
 
-	/* allocate memory for new environ */
+	/* allocate memory for new environ (+2 because of null pointer and new environ var*/
 	new_environ = malloc((env_len + 2) * sizeof(char *));
 	if (new_environ == NULL)
 	{

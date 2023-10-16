@@ -21,7 +21,7 @@ ssize_t _getline(char **lineptr, size_t *alloc_size, FILE *input);
 const char *_strchr(const char *s, int c);
 int _strcmp(const char *s1, char *s2);
 void *_realloc(void *ptr, size_t new_size);
-int _f_ok(char *cmd, char **environ);
+int _f_ok(char *cmd);
 int __exit(char *input);
 int __env(char *input);
 int _strlen(const char *s);
@@ -32,7 +32,8 @@ char **parse_input(char *input, int *token_status);
 int is_setenv(char *input);
 int _putenv(char *name_value);
 int is_builtin(char *input);
-
+int _unsetenv(char *name);
+char *_getenv(const char *name);
 
 #endif
 

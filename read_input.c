@@ -10,7 +10,8 @@
 char *read_input(int *eof_status)
 {
 	char *input;
-	size_t bytes_read, input_len;
+	size_t input_len;
+	int bytes_read;
 
 	input_len = 0;
 	*eof_status = 0;
