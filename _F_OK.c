@@ -34,6 +34,7 @@ int _f_ok(char *cmd, char **environ)
 		if (executable == NULL)
 		{
 			perror("malloc");
+			free(path);
 			return (1);
 		}
 
@@ -42,11 +43,11 @@ int _f_ok(char *cmd, char **environ)
 		if (access(executable, F_OK) == 0)
 		{
 			free(executable);
+			free(path);
 			return (0);
 		}
 		free(executable);
 		token = _strtok(NULL, ":");
-
 	}
 	perror("access");
 	return (1);
