@@ -22,32 +22,19 @@ int main(void)
 			if (eof_status == 1)
 				break;
 			args = parse_input(input, &token_status);
-			if (token_status == 1)
-			{
-				/*free(input);*/
+
+			if (token_status == 1 || is_builtin(input) == 99 || _f_ok(args[0]) != 0)
 				continue;
-			}
-			if (is_builtin(input) == 99)
-			{
-				/*free(input);*/
-				continue;
-			}
-			if (_f_ok(args[0]) != 0)
-			{
-				/*free(input);*/
-				continue;
-			}
+
 			pid = fork();
 			if (pid == 0)
 			{
 				_execvpe(args[0], args, environ);
 				perror("execve");
-				/*free(input);*/
 				exit(EXIT_FAILURE);
 			}
 			else
 				waitpid(pid, &status, 0);
-			/*free(input);*/
 		}
 	}
 	else
@@ -71,7 +58,6 @@ int main(void)
 
 		}
 	}
-	/*free(input);*/
 	return (0);
 }
 
