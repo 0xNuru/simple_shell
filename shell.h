@@ -18,6 +18,10 @@ extern char **environ;
 /* shell.c */
 void free_args(char **args);
 
+/* mode.c */
+void interactive_sh(void);
+void non_interactive_sh(void);
+
 /* _execvpe.c */
 int _execvpe(const char *cmd, char *argv[], char *const envp[]);
 
