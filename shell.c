@@ -57,7 +57,6 @@ while (1)
 	free(input);
 }
 free(input);
-free_args(args);
 return (0);
 }
 
