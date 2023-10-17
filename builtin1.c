@@ -18,7 +18,6 @@ int __exit(char *input)
 	if (token_status == 1)
 	{
 		free(inputcpy);
-		free_args(args);
 		return (0);
 	}
 
@@ -27,7 +26,6 @@ int __exit(char *input)
 		if (args[1] == NULL)
 		{
 			free(inputcpy);
-			free_args(args);
 			exit(EXIT_SUCCESS);
 		}
 
@@ -36,7 +34,6 @@ int __exit(char *input)
 			error = "usage: exit status\n";
 			write(2, error, strlen(error));
 			free(inputcpy);
-			free_args(args);
 			return (1);
 		}
 		status = atoi(args[1]);
@@ -45,11 +42,9 @@ int __exit(char *input)
 			error = "invalid exit status\n";
 			write(2, error, strlen(error));
 			free(inputcpy);
-			free_args(args);
 			return (1);
 		}
 		free(inputcpy);
-		free_args(args);
 		exit(status);
 	}
 	free(inputcpy);
@@ -113,7 +108,7 @@ int _setenv(const char *name, const char *value, int overwrite)
 		return (-1);
 
 	/* if env var already exitst and overwrite is false */
-	if (getenv(name) != NULL && overwrite != 0)
+	if (_getenv(name) != NULL && overwrite != 0)
 		return (0);
 
 
@@ -132,10 +127,10 @@ int _setenv(const char *name, const char *value, int overwrite)
 	/* Error handling: */
 	if (putenv_status != 0)
 	{
-		free(env_name_value);
+		/*free(env_name_value);*/
 		return  (-1);
 	}
-	free(env_name_value);
+	/*free(env_name_value);*/
 	return (0);
 }
 
@@ -149,25 +144,18 @@ int _setenv(const char *name, const char *value, int overwrite)
 
 int is_setenv(char *input)
 {
-	char *inputcpy, **args, *error;
+	char *inputcpy, **args, *error = "usage: setenv VARIABLE VALUE\n";
 	int token_status;
 
 	inputcpy = strdup(input);
 	args = parse_input(inputcpy, &token_status);
 	if (token_status == 1)
-	{
-		free(inputcpy);
-		free_args(args);
 		return (0);
-	}
 	if (_strcmp(args[0], "setenv") == 0)
 	{
-		if (args[1] == NULL || args[2] == NULL)
+		if (args[1] == NULL || args[2] == NULL || args[3] != NULL)
 		{
-			error = "usage: setenv VARIABLE VALUE\n";
 			write(2, error, strlen(error));
-			free(inputcpy);
-			free_args(args);
 			return (98);
 		}
 
@@ -175,18 +163,28 @@ int is_setenv(char *input)
 		{
 			error = "setenv failed\n";
 			write(2, error, strlen(error));
-			free(inputcpy);
-			free_args(args);
 			return (98);
 		}
-		free(inputcpy);
-		free_args(args);
 		return (99);
 	}
-	free(inputcpy);
+	if (_strcmp(args[0], "unsetenv") == 0)
+	{
+		if (args[1] == NULL || args[3] != NULL)
+		{
+			error = "usage: unsetenv VARIABLE\n";
+			write(2, error, strlen(error));
+			return (98);
+		}
+		if (_unsetenv(args[1]) == -1)
+		{
+			error = "unsetenv failed\n";
+			write(2, error, strlen(error));
+			return (98);
+		}
+		return (99);
+	}
 	return (0);
 }
-
 
 
 /**
@@ -202,11 +200,14 @@ int _putenv(char *name_value)
 	int env_len = 0, i;
 	char **new_environ;
 
-	/* Find length of the environment array */
+	/* find length of environment array */
 	while (environ[env_len])
 		env_len++;
 
-	/* Allocate memory for new environ */
+	/**
+	 * allocate memory for new environ (+2 because of null pointer
+	 * and new environ var
+	 */
 	new_environ = malloc((env_len + 2) * sizeof(char *));
 	if (new_environ == NULL)
 	{
@@ -220,12 +221,6 @@ int _putenv(char *name_value)
 
 	new_environ[env_len] = strdup(name_value);
 	new_environ[env_len + 1] = NULL;
-
-	for (i = 0; environ[i] != NULL; i++)
-	{
-		free(environ[i]);
-	}
-	free(environ);
 
 	environ = new_environ;
 

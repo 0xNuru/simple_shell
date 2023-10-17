@@ -116,11 +116,15 @@ return (initial_dest);
 
 char *_strdup(const char *s)
 {
+
+int length;
+char *duplicate;
+
 if (s == NULL)
 	return (NULL);
 
-int length = strlen(s) + 1;
-char *duplicate = (char *)malloc(length);
+length = strlen(s) + 1;
+duplicate = (char *)malloc(length);
 
 if (duplicate == NULL)
 	return (NULL);

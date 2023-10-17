@@ -15,29 +15,56 @@
 
 extern char **environ;
 
-int _execvpe(const char *cmd, char *argv[], char *const envp[]);
-char *_strtok(char *input, const char *delim);
-ssize_t _getline(char **lineptr, size_t *alloc_size, FILE *input);
-const char *_strchr(const char *s, int c);
-int _strcmp(const char *s1, char *s2);
-void *_realloc(void *ptr, size_t new_size);
-int _f_ok(char *cmd, char **environ);
-int __exit(char *input);
-int __env(char *input);
-int _strlen(const char *s);
-char *read_input(int *eof_status);
-char **parse_input(char *input, int *token_status);
-int is_setenv(char *input);
-int _putenv(char *name_value);
-int is_builtin(char *input);
-char *_strcpy(char *dest, const char *src);
-char *_strdup(const char *s);
+/* shell.c */
 void free_args(char **args);
 
+/* _execvpe.c */
+int _execvpe(const char *cmd, char *argv[], char *const envp[]);
 
+/* _strtok.c */
+char *_strtok(char *input, const char *delim);
 
+/* _getline.c */
+ssize_t _getline(char **lineptr, size_t *alloc_size, FILE *input);
 
+/* strings.c */
+const char *_strchr(const char *s, int c);
+int _strcmp(const char *s1, char *s2);
+int _strlen(const char *s);
+char *_strdup(const char *s);
+char *_strcpy(char *dest, const char *src);
 
+/* _realloc.c */
+void *_realloc(void *ptr, size_t new_size);
+
+/* _F_OK.c */
+int _f_ok(char *cmd);
+
+/* builtin1.c */
+int __exit(char *input);
+int __env(char *input);
+int _setenv(const char *name, const char *value, int overwrite);
+int is_setenv(char *input);
+int _putenv(char *name_value);
+
+/* _fgetc.c */
+int _fgetc(FILE *stream);
+
+/* _fgets.c */
+char *_fgets(char *s, int n, FILE *stream);
+
+/* read_input.c */
+char *read_input(int *eof_status);
+
+/* parse_input.c */
+char **parse_input(char *input, int *token_status);
+
+/* builtin2.c */
+int is_builtin(char *input);
+int _unsetenv(char *name);
+
+/* getenv */
+char *_getenv(const char *name);
 
 #endif
 

@@ -13,7 +13,7 @@
 ssize_t _getline(char **lineptr, size_t *alloc_size, FILE *input)
 {
 char delim; /* Delimiter */
-int tracker; /* Tracks current position in buffer where chars are stored */
+size_t tracker; /* Tracks current position in buffer where chars are stored */
 int bytes_read; /* Stores the result of the number of bytes read or EOF */
 char *new_buffer; /* Pointer storing the address of new memory allocated */
 
