@@ -22,17 +22,17 @@ while (1)
 	args = parse_input(input, &token_status);
 	if (token_status == 1)
 	{
-		free(input);
+		/*free(input);*/
 		continue;
 	}
 	if (is_builtin(input) == 99)
 	{
-		free(input);
+		/*free(input);*/
 		continue;
 	}
 	if (_f_ok(args[0]) != 0)
 	{
-		free(input);
+		/*free(input);*/
 		continue;
 	}
 	pid = fork();
@@ -40,12 +40,12 @@ while (1)
 	{
 		_execvpe(args[0], args, environ);
 		perror("execve");
-		free(input);
+		/*free(input);*/
 		exit(EXIT_FAILURE);
 	}
 	else
 		waitpid(pid, &status, 0);
-	free(input);
+	/*free(input);*/
 }
 /*free(input);*/
 return (0);
