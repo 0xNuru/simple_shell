@@ -52,7 +52,7 @@ int _execvpe(const char *cmd, char *argv[], char *const envp[])
 		token = _strtok(NULL, ":");
 	}
 	/* if the code reaches here, that means we have exhausted path */
-	free(executable);
+	/*free(executable);*/
 	perror("execve");
 	exit(EXIT_FAILURE);
 }

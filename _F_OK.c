@@ -41,11 +41,11 @@ int _f_ok(char *cmd)
 
 		if (access(executable, F_OK) == 0)
 		{
-			free(executable);
-			free(path);
+			/*free(executable);
+			free(path);*/
 			return (0);
 		}
-		free(executable);
+		/*free(executable);*/
 		token = _strtok(NULL, ":");
 	}
 	perror("access");
