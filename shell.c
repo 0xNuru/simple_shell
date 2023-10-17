@@ -47,7 +47,7 @@ while (1)
 		waitpid(pid, &status, 0);
 	free(input);
 }
-free(input);
+/*free(input);*/
 return (0);
 }
 
