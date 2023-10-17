@@ -15,7 +15,7 @@ int status, token_status, eof_status = 0;
 
 while (1)
 {
-	printf("($) ");
+	/*write(1, "($) ", strlen("($) "));*/
 	input = read_input(&eof_status);
 	if (eof_status == 1)
 		break;
