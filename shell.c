@@ -23,28 +23,24 @@ while (1)
 	if (eof_status == 1)
 		break;
 	args = parse_input(input, &token_status);
-
 	if (token_status == 1)
 	{
 		free(input);
 		free_args(args);
 		continue;
 	}
-
 	if (is_builtin(input) == 99)
 	{
 		free(input);
 		free_args(args);
 		continue;
 	}
-
 	if (_f_ok(args[0], environ) != 0)
 	{
 		free(input);
 		free_args(args);
 		continue;
 	}
-
 	pid = fork();
 	if (pid == 0)
 	{
@@ -68,6 +64,17 @@ return (0);
 
 
 
+
+
+
+
+
+/**
+ * free_args - Frees memory  for an array
+ * @args: String array being freed
+ *
+ */
+
 void free_args(char **args)
 {
 	if (args)
@@ -79,4 +86,3 @@ void free_args(char **args)
 		free(args);
 	}
 }
-

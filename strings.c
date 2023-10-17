@@ -48,7 +48,7 @@ return (length);
 
 /**
  * _strchr - Finds the first occurrence of characters within strings
- * @s: String to be searched 
+ * @s: String to be searched
  * @c: Character to be found
  *
  * Return: Pointer to the first occurrence of c in
@@ -66,7 +66,7 @@ while (*s != '\0')
 	s++;
 }
 if (c == '\0')
-        return (s);
+	return (s);
 
 return (NULL);
 }

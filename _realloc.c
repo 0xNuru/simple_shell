@@ -13,22 +13,18 @@ void *_realloc(void *ptr, size_t new_size)
 size_t prev_size, element_size, total_elements, i;
 void *new_ptr;
 char *prev_content, *new_content;
-/* Checks if new_size is 0 and if so, free the old memory block */
-if (new_size == 0)
+if (new_size == 0)  /* Checks if new_size is NULL and allocate new memory */
 {
 	free(ptr);
 	return (NULL);
 }
-/* Checks if ptr is NULL and if so, simply allocate new memory */
-if (ptr == NULL)
+if (ptr == NULL)  /* Checks if ptr is NULL and if so, allocate new memory */
 	return (malloc(new_size));
-/* Attempt to allocate memory for the new block */
-new_ptr = malloc(new_size);
+new_ptr = malloc(new_size); /* Attempt to allocate memory for the new block */
 {
 	free(ptr);
 	return (new_ptr);
 }
-
 if (new_ptr)
 {
 	/* Calculate the size of each element and the total number of elements */

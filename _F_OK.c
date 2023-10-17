@@ -48,7 +48,6 @@ int _f_ok(char *cmd, char **environ)
 		}
 		free(executable);
 		token = _strtok(NULL, ":");
-
 	}
 	perror("access");
 	return (1);

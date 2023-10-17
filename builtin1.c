@@ -37,7 +37,7 @@ int __exit(char *input)
 			write(2, error, strlen(error));
 			free(inputcpy);
 			free_args(args);
-			return(1);
+			return (1);
 		}
 		status = atoi(args[1]);
 		if (status == 0 && _strcmp(args[1], "0") != 0)
@@ -155,7 +155,7 @@ int is_setenv(char *input)
 	inputcpy = strdup(input);
 	args = parse_input(inputcpy, &token_status);
 	if (token_status == 1)
-	{	
+	{
 		free(inputcpy);
 		free_args(args);
 		return (0);
