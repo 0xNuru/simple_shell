@@ -25,8 +25,6 @@ int _f_ok(char *cmd, char **environ);
 int __exit(char *input);
 int __env(char *input);
 int _strlen(const char *s);
-int _fgetc(FILE *stream);
-char *_fgets(char *s, int n, FILE *stream);
 char *read_input(int *eof_status);
 char **parse_input(char *input, int *token_status);
 int is_setenv(char *input);
@@ -34,6 +32,8 @@ int _putenv(char *name_value);
 int is_builtin(char *input);
 char *_strcpy(char *dest, const char *src);
 char *_strdup(const char *s);
+void free_args(char **args);
+
 
 
 

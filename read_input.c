@@ -12,9 +12,11 @@ char *read_input(int *eof_status)
 	char *input;
 	size_t bytes_read, input_len;
 
+	input = NULL;
 	input_len = 0;
 	*eof_status = 0;
-	bytes_read = _getline(&input, &input_len, stdin);
+	bytes_read = getline(&input, &input_len, stdin);
+
 	if (bytes_read == -1)
 	{
 		if (feof(stdin))
@@ -24,7 +26,7 @@ char *read_input(int *eof_status)
 		}
 		else
 		{
-			perror("_getline");
+			perror("getline");
 			free(input);
 			exit(EXIT_FAILURE);
 		}

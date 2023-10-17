@@ -24,6 +24,10 @@ if (ptr == NULL)
 	return (malloc(new_size));
 /* Attempt to allocate memory for the new block */
 new_ptr = malloc(new_size);
+{
+	free(ptr);
+	return (new_ptr);
+}
 
 if (new_ptr)
 {

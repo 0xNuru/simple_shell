@@ -23,29 +23,60 @@ while (1)
 	if (eof_status == 1)
 		break;
 	args = parse_input(input, &token_status);
+
 	if (token_status == 1)
+	{
+		free(input);
+		free_args(args);
 		continue;
+	}
 
 	if (is_builtin(input) == 99)
+	{
+		free(input);
+		free_args(args);
 		continue;
+	}
 
 	if (_f_ok(args[0], environ) != 0)
+	{
+		free(input);
+		free_args(args);
 		continue;
+	}
 
 	pid = fork();
 	if (pid == 0)
 	{
 		_execvpe(args[0], args, environ);
 		perror("execve");
-		free(args);
+		free(input);
+		free_args(args);
 		exit(EXIT_FAILURE);
 	}
 	else
 	{
 		waitpid(pid, &status, 0);
 	}
-	free(args);
+	free(input);
 }
 free(input);
+free_args(args);
 return (0);
 }
+
+
+
+
+void free_args(char **args)
+{
+	if (args)
+	{
+		for (int i = 0; args[i] != NULL; i++)
+		{
+			free(args[i]);
+		}
+		free(args);
+	}
+}
+

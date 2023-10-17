@@ -16,28 +16,43 @@ int __exit(char *input)
 	inputcpy = strdup(input);
 	args = parse_input(inputcpy, &token_status);
 	if (token_status == 1)
+	{
+		free(inputcpy);
+		free_args(args);
 		return (0);
+	}
 
 	if (_strcmp(args[0], "exit") == 0)
 	{
 		if (args[1] == NULL)
+		{
+			free(inputcpy);
+			free_args(args);
 			exit(EXIT_SUCCESS);
+		}
 
 		if (args[2] != NULL)
 		{
 			error = "usage: exit status\n";
 			write(2, error, strlen(error));
-			return (1);
+			free(inputcpy);
+			free_args(args);
+			return(1);
 		}
 		status = atoi(args[1]);
 		if (status == 0 && _strcmp(args[1], "0") != 0)
 		{
 			error = "invalid exit status\n";
 			write(2, error, strlen(error));
+			free(inputcpy);
+			free_args(args);
 			return (1);
 		}
+		free(inputcpy);
+		free_args(args);
 		exit(status);
 	}
+	free(inputcpy);
 	return (0);
 }
 
@@ -65,8 +80,10 @@ int __env(char *input)
 			printf("%s\n", *env);
 			env++;
 		}
+		free(inputcpy);
 		return (0);
 	}
+	free(inputcpy);
 	return (1);
 }
 
@@ -118,7 +135,7 @@ int _setenv(const char *name, const char *value, int overwrite)
 		free(env_name_value);
 		return  (-1);
 	}
-
+	free(env_name_value);
 	return (0);
 }
 
@@ -138,14 +155,19 @@ int is_setenv(char *input)
 	inputcpy = strdup(input);
 	args = parse_input(inputcpy, &token_status);
 	if (token_status == 1)
+	{	
+		free(inputcpy);
+		free_args(args);
 		return (0);
-
+	}
 	if (_strcmp(args[0], "setenv") == 0)
 	{
 		if (args[1] == NULL || args[2] == NULL)
 		{
 			error = "usage: setenv VARIABLE VALUE\n";
 			write(2, error, strlen(error));
+			free(inputcpy);
+			free_args(args);
 			return (98);
 		}
 
@@ -153,10 +175,15 @@ int is_setenv(char *input)
 		{
 			error = "setenv failed\n";
 			write(2, error, strlen(error));
+			free(inputcpy);
+			free_args(args);
 			return (98);
 		}
+		free(inputcpy);
+		free_args(args);
 		return (99);
 	}
+	free(inputcpy);
 	return (0);
 }
 
@@ -175,11 +202,11 @@ int _putenv(char *name_value)
 	int env_len = 0, i;
 	char **new_environ;
 
-	/* find length of environment array */
+	/* Find length of the environment array */
 	while (environ[env_len])
 		env_len++;
 
-	/* allocate memory for new environ */
+	/* Allocate memory for new environ */
 	new_environ = malloc((env_len + 2) * sizeof(char *));
 	if (new_environ == NULL)
 	{
@@ -187,14 +214,21 @@ int _putenv(char *name_value)
 		return (-1);
 	}
 
-	/* copy old environ to new_environ */
+	/* Copy old environ to new_environ */
 	for (i = 0; i < env_len; i++)
 		new_environ[i] = strdup(environ[i]);
 
 	new_environ[env_len] = strdup(name_value);
 	new_environ[env_len + 1] = NULL;
 
+	for (i = 0; environ[i] != NULL; i++)
+	{
+		free(environ[i]);
+	}
+	free(environ);
+
 	environ = new_environ;
 
 	return (0);
 }
+
