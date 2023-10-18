@@ -20,7 +20,7 @@ char *read_input(int *eof_status)
 	{
 		if (feof(stdin))
 		{
-			write(1, "\n", 1);;
+			write(1, "\n", 1);
 			*eof_status = 1;
 		}
 		else

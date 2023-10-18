@@ -54,21 +54,20 @@ void non_interactive_sh(void)
 			/*free(input);*/
 			if (token_status == 1 || is_builtin(args) == 99 ||  _f_ok(args[0]) != 0)
 				return;
-			else
+
+			pid = fork();
+			if (pid == 0)
 			{
-				pid = fork();
-				if (pid == 0)
-				{
-					_execvpe(args[0], args, environ);
-					perror("execve");
+				_execvpe(args[0], args, environ);
+				perror("execve");
 					exit(EXIT_FAILURE);
-				}
-				else
-					waitpid(pid, &status, 0);
 			}
+			else
+				waitpid(pid, &status, 0);
+
 			/*free_args(args);*/
 			free(args[0]);
-    			free(args);
+			free(args);
 			/*free(input);*/
 		}
 }
