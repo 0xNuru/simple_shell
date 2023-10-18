@@ -10,12 +10,12 @@
 
 char **parse_input(char *input, int *token_status)
 {
-	char *token = NULL, **args, *inputcpy;
+	char *token = NULL, **args;
 	int t_count = 0;
 
 	*token_status = 0;
-	inputcpy = strdup(input);
-	token = strtok(inputcpy, TOKEN_DELIM);
+	/*inputcpy = strdup(input);*/
+	token = strtok(input, TOKEN_DELIM);
 	if (token == NULL)
 	{
 		*token_status = 1;
@@ -23,7 +23,7 @@ char **parse_input(char *input, int *token_status)
 	args = malloc(sizeof(char *) * 64);
 	if (args == NULL)
 	{
-		free(inputcpy);
+		/*free(inputcpy);*/
 		perror("malloc");
 		exit(EXIT_FAILURE);
 	}
@@ -37,7 +37,7 @@ char **parse_input(char *input, int *token_status)
 			args = _realloc(args, sizeof(char *) * t_count * 2);
 			if (args == NULL)
 			{
-				free(inputcpy);
+				/*free(inputcpy);*/
 				perror("realloc");
 				exit(EXIT_FAILURE);
 			}

@@ -16,6 +16,8 @@ int __exit(char **args)
 	{
 		if (args[1] == NULL)
 		{
+			free(args[0]);
+			free(args);
 			exit(EXIT_SUCCESS);
 		}
 
@@ -32,6 +34,8 @@ int __exit(char **args)
 			write(2, error, strlen(error));
 			return (1);
 		}
+		free(args[0]);
+		free(args);
 		exit(status);
 	}
 	return (0);
