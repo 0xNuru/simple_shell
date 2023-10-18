@@ -33,6 +33,7 @@ char *_strtok(char *input, const char *delim);
 
 /* _getline.c */
 ssize_t _getline(char **lineptr, size_t *alloc_size, FILE *input);
+ssize_t _eof(char **lineptr, size_t tracker);
 
 /* strings.c */
 const char *_strchr(const char *s, int c);
