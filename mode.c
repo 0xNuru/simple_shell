@@ -31,7 +31,8 @@ void interactive_sh(void)
 		else
 			waitpid(pid, &status, 0);
 	}
-	/*free_args(args);*/
+	free(args[0]);
+	free(args);
 	/*free(input);*/
 }
 
@@ -43,17 +44,16 @@ void non_interactive_sh(void)
 {
 	char *input, **args;
 	pid_t pid;
-	int status, token_status, eof_status = 0, i = 0;
+	int status, token_status, eof_status = 0;
 
 	input = read_input(&eof_status);
 
 		if (eof_status != 1)
 		{
 			args = parse_input(input, &token_status);
+			/*free(input);*/
 			if (token_status == 1 || is_builtin(args) == 99 ||  _f_ok(args[0]) != 0)
-			{
 				return;
-			}
 			else
 			{
 				pid = fork();
@@ -64,17 +64,11 @@ void non_interactive_sh(void)
 					exit(EXIT_FAILURE);
 				}
 				else
-				{
 					waitpid(pid, &status, 0);
-				}
 			}
 			/*free_args(args);*/
-			while (args[i] != NULL)
-			{
-				free(args[i]);
-				i++;
-			}
-			free(args);
-			free(input);
+			free(args[0]);
+    			free(args);
+			/*free(input);*/
 		}
 }
