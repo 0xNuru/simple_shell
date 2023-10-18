@@ -31,7 +31,8 @@ void interactive_sh(void)
 		else
 			waitpid(pid, &status, 0);
 	}
-	free_args(args);
+	/*free_args(args);*/
+	/*free(input);*/
 }
 
 /**

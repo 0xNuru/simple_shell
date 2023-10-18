@@ -31,13 +31,17 @@ int main(void)
 void free_args(char **args)
 {
 	int i;
-
-	if (args)
+	
+	if (args != NULL && *args != NULL)
 	{
-		for (i = 0; args[i] != NULL; i++)
+
+		if (args)
 		{
-			free(args[i]);
+			for (i = 0; args[i] != NULL; i++)
+			{
+				free(args[i]);
+			}
+			free(args);
 		}
-		free(args);
 	}
 }
