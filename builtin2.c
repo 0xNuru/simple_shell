@@ -2,7 +2,7 @@
 
 /**
 * is_builtin - a function to check if the command entered is a builtin
-* @input: the line entered
+* @args: Array of command arguments
 *
 * Return: 99 (a builtin was encounterd), otherwise 0
 */
