@@ -40,7 +40,7 @@ int __exit(char **args)
 
 /**
 * __env - a function that prints
-* @input: input string
+* @args: Array of command arguments
 *
 * Return: 0 (success)
 */
