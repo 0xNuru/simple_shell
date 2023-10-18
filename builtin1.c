@@ -110,7 +110,7 @@ int _setenv(const char *name, const char *value, int overwrite)
 	sprintf(env_name_value, "%s=%s", name, value);
 
 	/* call putenv and save the return value in putenv_status  */
-	putenv_status = _putenv(env_name_value);
+	putenv_status = putenv(env_name_value);
 	/* Error handling: */
 	if (putenv_status != 0)
 	{
