@@ -7,15 +7,15 @@
 * Return: 99 (a builtin was encounterd), otherwise 0
 */
 
-int is_builtin(char *input)
+int is_builtin(char **args)
 {
-	if (__exit(input) != 0)
+	if (__exit(args) != 0)
 		return (99);
 
-	if (__env(input) == 0)
+	if (__env(args) == 0)
 		return (99);
 
-	if (is_setenv(input) != 0)
+	if (is_setenv(args) != 0)
 		return (99);
 
 	return (0);
