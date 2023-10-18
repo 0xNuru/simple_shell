@@ -43,7 +43,6 @@ char **parse_input(char *input, int *token_status)
 			}
 		}
 	}
-	free(inputcpy);
 	args[t_count] = NULL;
 	return (args);
 }
