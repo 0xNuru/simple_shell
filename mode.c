@@ -51,7 +51,9 @@ void non_interactive_sh(void)
 		{
 			args = parse_input(input, &token_status);
 			if (token_status == 1 || is_builtin(args) == 99 ||  _f_ok(args[0]) != 0)
+			{
 				return;
+			}
 			else
 			{
 				pid = fork();
@@ -62,15 +64,17 @@ void non_interactive_sh(void)
 					exit(EXIT_FAILURE);
 				}
 				else
+				{
 					waitpid(pid, &status, 0);
+				}
 			}
 			/*free_args(args);*/
-  			while(args[i] != NULL)
+			while (args[i] != NULL)
 			{
 				free(args[i]);
-        			i++;
-    			}
-    			free(args);
+				i++;
+			}
+			free(args);
 			free(input);
 		}
 }
