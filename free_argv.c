@@ -1,11 +1,9 @@
 #include "shell.h"
 
 /**
-* main - entry point
-* @n: number..
+* free_argv - Frees a double pointer array
 *
-* Description: a function that prints the alphabet
-* Return: 0 (success)
+* @args: The double pointer array to free.
 */
 
 void free_argv(char **args)
