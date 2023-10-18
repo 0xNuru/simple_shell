@@ -2,7 +2,7 @@
 
 /**
 * __exit - a function that exits from process
-* @input: input string
+* @args: Array of command arguments
 *
 * Return: (1) if exit was entered
 */
