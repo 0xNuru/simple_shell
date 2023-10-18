@@ -20,7 +20,6 @@ int __exit(char *input)
 		free(inputcpy);
 		return (0);
 	}
-
 	if (_strcmp(args[0], "exit") == 0)
 	{
 		if (args[1] == NULL)
@@ -47,7 +46,6 @@ int __exit(char *input)
 		free(inputcpy);
 		exit(status);
 	}
-	/*free(args[0]);*/
 	free(args);
 	free(inputcpy);
 	return (0);
