@@ -62,6 +62,8 @@ int __env(char **args)
 			write(1, "\n", 1);
 			env++;
 		}
+		free(args[0]);
+		free(args);
 		return (0);
 	}
 	return (1);
