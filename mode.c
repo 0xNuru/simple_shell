@@ -43,7 +43,7 @@ void non_interactive_sh(void)
 {
 	char *input, **args;
 	pid_t pid;
-	int status, token_status, eof_status = 0;
+	int status, token_status, eof_status = 0, i = 0;
 
 	input = read_input(&eof_status);
 
@@ -64,7 +64,13 @@ void non_interactive_sh(void)
 				else
 					waitpid(pid, &status, 0);
 			}
-			free_args(args);
+			/*free_args(args);*/
+  			while(args[i] != NULL)
+			{
+				free(args[i]);
+        			i++;
+    			}
+    			free(args);
 			free(input);
 		}
 }

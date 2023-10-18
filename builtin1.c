@@ -54,7 +54,8 @@ int __env(char **args)
 	{
 		while (*env)
 		{
-			printf("%s\n", *env);
+			write(1, *env, strlen(*env));
+			write(1, "\n", 1);
 			env++;
 		}
 		return (0);
