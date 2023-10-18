@@ -24,14 +24,14 @@ int __exit(char **args)
 		if (args[2] != NULL)
 		{
 			error = "usage: exit status\n";
-			write(2, error, strlen(error));
+			write(2, error, _strlen(error));
 			return (1);
 		}
 		status = atoi(args[1]);
 		if (status == 0 && _strcmp(args[1], "0") != 0)
 		{
 			error = "invalid exit status\n";
-			write(2, error, strlen(error));
+			write(2, error, _strlen(error));
 			return (1);
 		}
 		free(args[0]);
@@ -58,7 +58,7 @@ int __env(char **args)
 	{
 		while (*env)
 		{
-			write(1, *env, strlen(*env));
+			write(1, *env, _strlen(*env));
 			write(1, "\n", 1);
 			env++;
 		}
@@ -89,7 +89,7 @@ int _setenv(const char *name, const char *value, int overwrite)
 	int putenv_status;
 
 	/* Error handling: name has to be in the correct format */
-	if (name == NULL || name[0] == '\0' || strchr(name, '=') != NULL)
+	if (name == NULL || name[0] == '\0' || _strchr(name, '=') != NULL)
 		return (-1);
 
 	/* if env var already exitst and overwrite is false */
@@ -97,7 +97,7 @@ int _setenv(const char *name, const char *value, int overwrite)
 		return (0);
 
 
-	env_name_value = malloc(strlen(name) + strlen(value) + 2);
+	env_name_value = malloc(_strlen(name) + _strlen(value) + 2);
 	if (env_name_value == NULL)
 	{
 		perror("malloc");
@@ -135,14 +135,14 @@ int is_setenv(char **args)
 	{
 		if (args[1] == NULL || args[2] == NULL || args[3] != NULL)
 		{
-			write(2, error, strlen(error));
+			write(2, error, _strlen(error));
 			return (98);
 		}
 
 		if (_setenv(args[1], args[2], 1) == -1)
 		{
 			error = "setenv failed\n";
-			write(2, error, strlen(error));
+			write(2, error, _strlen(error));
 			return (98);
 		}
 		return (99);
@@ -152,13 +152,13 @@ int is_setenv(char **args)
 		if (args[1] == NULL || args[3] != NULL)
 		{
 			error = "usage: unsetenv VARIABLE\n";
-			write(2, error, strlen(error));
+			write(2, error, _strlen(error));
 			return (98);
 		}
 		if (_unsetenv(args[1]) == -1)
 		{
 			error = "unsetenv failed\n";
-			write(2, error, strlen(error));
+			write(2, error, _strlen(error));
 			return (98);
 		}
 		return (99);
@@ -197,9 +197,9 @@ int _putenv(char *name_value)
 
 	/* Copy old environ to new_environ */
 	for (i = 0; i < env_len; i++)
-		new_environ[i] = strdup(environ[i]);
+		new_environ[i] = _strdup(environ[i]);
 
-	new_environ[env_len] = strdup(name_value);
+	new_environ[env_len] = _strdup(name_value);
 	new_environ[env_len + 1] = NULL;
 
 	environ = new_environ;

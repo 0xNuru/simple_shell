@@ -15,7 +15,7 @@ char **parse_input(char *input, int *token_status)
 
 	*token_status = 0;
 	/*inputcpy = strdup(input);*/
-	token = strtok(input, TOKEN_DELIM);
+	token = _strtok(input, TOKEN_DELIM);
 	if (token == NULL)
 	{
 		*token_status = 1;
@@ -29,7 +29,7 @@ char **parse_input(char *input, int *token_status)
 	}
 	args[t_count++] = token;
 
-	while ((token = strtok(NULL, TOKEN_DELIM)))
+	while ((token = _strtok(NULL, TOKEN_DELIM)))
 	{
 		args[t_count++] = token;
 		if (t_count >= 64)

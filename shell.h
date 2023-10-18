@@ -37,10 +37,13 @@ ssize_t _eof(char **lineptr, size_t tracker);
 
 /* strings.c */
 const char *_strchr(const char *s, int c);
-int _strcmp(const char *s1, char *s2);
+int _strcmp(const char *s1, const char *s2);
 int _strlen(const char *s);
 char *_strdup(const char *s);
 char *_strcpy(char *dest, const char *src);
+
+/* Strings1.c */
+int _strncmp(const char *s1, const char *s2, size_t n);
 
 /* _realloc.c */
 void *_realloc(void *ptr, size_t new_size);

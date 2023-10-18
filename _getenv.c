@@ -20,14 +20,14 @@ char *_getenv(const char *name)
 	while (*env)
 	{
 		/* tokenize each one with the delim "=" */
-		env_var = strtok(strdup(*env), "=");
+		env_var = _strtok(_strdup(*env), "=");
 		if (env_var == NULL)
 			return (NULL);
 
 		/* check if name matches the first token (variable name) */
-		if (strcmp(env_var, name) == 0)
+		if (_strcmp(env_var, name) == 0)
 		{
-			value = strtok(NULL, "=");
+			value = _strtok(NULL, "=");
 			free(env_var);
 			return (value);
 		}

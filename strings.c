@@ -9,7 +9,7 @@
  * less than, greater than, or equal to s2.
  */
 
-int _strcmp(const char *s1, char *s2)
+int _strcmp(const char *s1, const char *s2)
 {
 while (*s1 != '\0' && *s1 == *s2)
 {

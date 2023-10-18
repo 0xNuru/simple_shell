@@ -12,7 +12,7 @@ void interactive_sh(void)
 
 	while (1)
 	{
-		write(1, "($) ", strlen("($) "));
+		write(1, "($) ", _strlen("($) "));
 		input = read_input(&eof_status);
 		if (eof_status == 1)
 			break;

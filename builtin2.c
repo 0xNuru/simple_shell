@@ -49,9 +49,9 @@ int _unsetenv(char *name)
 	/* copy old environ to new_environ excluding the unset var */
 	for (i = 0, j = 0; i < environ_len; i++)
 	{
-		if (strncmp(environ[i], name, strlen(name)) != 0)
+		if (_strncmp(environ[i], name, _strlen(name)) != 0)
 		{
-			new_environ[j] = strdup(environ[i]);
+			new_environ[j] = _strdup(environ[i]);
 			if (new_environ[j] == NULL)
 			{
 				perror("malloc");

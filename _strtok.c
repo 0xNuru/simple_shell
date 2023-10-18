@@ -29,7 +29,7 @@ if (tracker == NULL || *tracker == '\0')
 /* Locate the end of the token */
 while (*tracker != '\0')
 {
-	if (strchr(delim, *tracker) != NULL)
+	if (_strchr(delim, *tracker) != NULL)
 	{
 		/* Delimiter has been found */
 		*tracker = '\0'; /* Terminate the current token */
