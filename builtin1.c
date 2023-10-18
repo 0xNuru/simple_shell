@@ -7,24 +7,15 @@
 * Return: (1) if exit was entered
 */
 
-int __exit(char *input)
+int __exit(char **args)
 {
-	char *inputcpy, **args, *error;
-	long int status;
-	int token_status;
+	int status;
+	char *error;
 
-	inputcpy = strdup(input);
-	args = parse_input(inputcpy, &token_status);
-	if (token_status == 1)
-	{
-		free(inputcpy);
-		return (0);
-	}
 	if (_strcmp(args[0], "exit") == 0)
 	{
 		if (args[1] == NULL)
 		{
-			free(inputcpy);
 			exit(EXIT_SUCCESS);
 		}
 
@@ -32,7 +23,6 @@ int __exit(char *input)
 		{
 			error = "usage: exit status\n";
 			write(2, error, strlen(error));
-			free(inputcpy);
 			return (1);
 		}
 		status = atoi(args[1]);
@@ -40,14 +30,10 @@ int __exit(char *input)
 		{
 			error = "invalid exit status\n";
 			write(2, error, strlen(error));
-			free(inputcpy);
 			return (1);
 		}
-		free(inputcpy);
 		exit(status);
 	}
-	free(args);
-	free(inputcpy);
 	return (0);
 }
 
@@ -59,26 +45,20 @@ int __exit(char *input)
 * Return: 0 (success)
 */
 
-int __env(char *input)
+int __env(char **args)
 {
-	char *token1, *token2, *inputcpy;
 	char **env = environ;
 
-	inputcpy = strdup(input);
-	token1 = _strtok(inputcpy, " ");
-	token2 = _strtok(NULL, " ");
 
-	if ((_strcmp(token1, "env") == 0) && (token2 == NULL))
+	if ((_strcmp(args[0], "env") == 0) && (args[1] == NULL))
 	{
 		while (*env)
 		{
 			printf("%s\n", *env);
 			env++;
 		}
-		free(inputcpy);
 		return (0);
 	}
-	free(inputcpy);
 	return (1);
 }
 
@@ -142,18 +122,10 @@ int _setenv(const char *name, const char *value, int overwrite)
 * Return: 0 (success) otherwise -1.
 */
 
-int is_setenv(char *input)
+int is_setenv(char **args)
 {
-	char *inputcpy, **args, *error = "usage: setenv VARIABLE VALUE\n";
-	int token_status;
+	char *error = "usage: setenv VARIABLE VALUE\n";
 
-	inputcpy = strdup(input);
-	args = parse_input(inputcpy, &token_status);
-	if (token_status == 1)
-	{
-		free(inputcpy);
-		return (0);
-	}
 	if (_strcmp(args[0], "setenv") == 0)
 	{
 		if (args[1] == NULL || args[2] == NULL || args[3] != NULL)
@@ -186,8 +158,6 @@ int is_setenv(char *input)
 		}
 		return (99);
 	}
-	free(args);
-	free(inputcpy);
 	return (0);
 }
 

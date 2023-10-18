@@ -18,7 +18,7 @@ void interactive_sh(void)
 			break;
 		args = parse_input(input, &token_status);
 
-		if (token_status == 1 || is_builtin(input) == 99 || _f_ok(args[0]) != 0)
+		if (token_status == 1 || is_builtin(args) == 99 || _f_ok(args[0]) != 0)
 			continue;
 
 		pid = fork();
@@ -50,7 +50,7 @@ void non_interactive_sh(void)
 		if (eof_status != 1)
 		{
 			args = parse_input(input, &token_status);
-			if (token_status == 1 || is_builtin(input) == 99 ||  _f_ok(args[0]) != 0)
+			if (token_status == 1 || is_builtin(args) == 99 ||  _f_ok(args[0]) != 0)
 				return;
 			else
 			{

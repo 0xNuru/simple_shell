@@ -49,10 +49,10 @@ void *_realloc(void *ptr, size_t new_size);
 int _f_ok(char *cmd);
 
 /* builtin1.c */
-int __exit(char *input);
-int __env(char *input);
+int __exit(char **args);
+int __env(char **args);
 int _setenv(const char *name, const char *value, int overwrite);
-int is_setenv(char *input);
+int is_setenv(char **args);
 int _putenv(char *name_value);
 
 /* _fgetc.c */
@@ -68,7 +68,7 @@ char *read_input(int *eof_status);
 char **parse_input(char *input, int *token_status);
 
 /* builtin2.c */
-int is_builtin(char *input);
+int is_builtin(char **args);
 int _unsetenv(char *name);
 
 /* getenv */
