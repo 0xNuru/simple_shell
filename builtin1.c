@@ -114,10 +114,10 @@ int _setenv(const char *name, const char *value, int overwrite)
 	/* Error handling: */
 	if (putenv_status != 0)
 	{
-		/*free(env_name_value);*/
+		free(env_name_value);
 		return  (-1);
 	}
-	/*free(env_name_value);*/
+	free(env_name_value);
 	return (0);
 }
 
@@ -147,6 +147,8 @@ int is_setenv(char **args)
 			write(2, error, _strlen(error));
 			return (98);
 		}
+		free(args[0]);
+		free(args);
 		return (99);
 	}
 	if (_strcmp(args[0], "unsetenv") == 0)
@@ -163,6 +165,8 @@ int is_setenv(char **args)
 			write(2, error, _strlen(error));
 			return (98);
 		}
+		free(args[0]);
+		free(args);
 		return (99);
 	}
 	return (0);

@@ -19,7 +19,7 @@ int _execvpe(const char *cmd, char *argv[], char *const envp[])
 	size_t cmd_len, token_len, e_len;
 
 	/* pass the content of PATH to var path */
-	path = _getenv("PATH");
+	path = getenv("PATH");
 	if (path == NULL)
 	{
 		perror("getenv");

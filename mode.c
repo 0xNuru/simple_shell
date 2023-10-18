@@ -60,7 +60,7 @@ void non_interactive_sh(void)
 			{
 				_execvpe(args[0], args, environ);
 				perror("execve");
-					exit(EXIT_FAILURE);
+				exit(EXIT_FAILURE);
 			}
 			else
 				waitpid(pid, &status, 0);
