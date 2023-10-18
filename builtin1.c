@@ -47,6 +47,7 @@ int __exit(char *input)
 		free(inputcpy);
 		exit(status);
 	}
+	free_args(args);
 	free(inputcpy);
 	return (0);
 }
@@ -186,6 +187,7 @@ int is_setenv(char *input)
 		}
 		return (99);
 	}
+	free_args(args);
 	free(inputcpy);
 	return (0);
 }
