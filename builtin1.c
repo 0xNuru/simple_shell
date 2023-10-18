@@ -117,7 +117,7 @@ int _setenv(const char *name, const char *value, int overwrite)
 
 /**
 * is_setenv - check if cmd is setenv and call setenv
-* @input: the input string
+* @args: Array of command arguments
 *
 * Return: 0 (success) otherwise -1.
 */
