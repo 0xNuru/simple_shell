@@ -9,6 +9,7 @@ void interactive_sh(void)
 	char *input, **args;
 	pid_t pid;
 	int status, token_status, eof_status = 0;
+
 	while (1)
 	{
 		write(1, "($) ", strlen("($) "));
@@ -41,12 +42,15 @@ void non_interactive_sh(void)
 	char *input, **args;
 	pid_t pid;
 	int status, token_status, eof_status = 0;
+
 	input = read_input(&eof_status);
 
 		if (eof_status != 1)
 		{
 			args = parse_input(input, &token_status);
-			if (token_status == 0 && is_builtin(input) != 99 && _f_ok(args[0]) == 0)
+			if (token_status == 1 || is_builtin(input) == 99 ||  _f_ok(args[0]) != 0)
+				return;
+			else
 			{
 				pid = fork();
 				if (pid == 0)

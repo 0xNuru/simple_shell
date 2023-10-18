@@ -40,11 +40,8 @@ int _f_ok(char *cmd)
 		snprintf(executable, e_len, "%s/%s", token, cmd);
 
 		if (access(executable, F_OK) == 0)
-		{
-			/*free(executable);
-			free(path);*/
 			return (0);
-		}
+
 		/*free(executable);*/
 		token = _strtok(NULL, ":");
 	}
