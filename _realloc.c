@@ -21,10 +21,7 @@ if (new_size == 0)  /* Checks if new_size is NULL and allocate new memory */
 if (ptr == NULL)  /* Checks if ptr is NULL and if so, allocate new memory */
 	return (malloc(new_size));
 new_ptr = malloc(new_size); /* Attempt to allocate memory for the new block */
-{
-	free(ptr);
-	return (new_ptr);
-}
+
 if (new_ptr)
 {
 	/* Calculate the size of each element and the total number of elements */
