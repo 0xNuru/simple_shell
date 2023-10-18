@@ -19,13 +19,12 @@ char **parse_input(char *input, int *token_status)
 	if (token == NULL)
 	{
 		*token_status = 1;
-		free(inputcpy);
 	}
 	args = malloc(sizeof(char *) * 64);
 	if (args == NULL)
 	{
-		perror("malloc");
 		free(inputcpy);
+		perror("malloc");
 		exit(EXIT_FAILURE);
 	}
 	args[t_count++] = token;
@@ -38,13 +37,13 @@ char **parse_input(char *input, int *token_status)
 			args = _realloc(args, sizeof(char *) * t_count * 2);
 			if (args == NULL)
 			{
-				perror("realloc");
 				free(inputcpy);
-				free_args(args);
+				perror("realloc");
 				exit(EXIT_FAILURE);
 			}
 		}
 	}
+	free(inputcpy);
 	args[t_count] = NULL;
 	return (args);
 }

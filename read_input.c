@@ -9,7 +9,7 @@
 
 char *read_input(int *eof_status)
 {
-	char *input;
+	char *input = NULL;
 	size_t input_len;
 	int bytes_read;
 

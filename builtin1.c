@@ -150,7 +150,10 @@ int is_setenv(char *input)
 	inputcpy = strdup(input);
 	args = parse_input(inputcpy, &token_status);
 	if (token_status == 1)
+	{
+		free(inputcpy);
 		return (0);
+	}
 	if (_strcmp(args[0], "setenv") == 0)
 	{
 		if (args[1] == NULL || args[2] == NULL || args[3] != NULL)
@@ -183,6 +186,7 @@ int is_setenv(char *input)
 		}
 		return (99);
 	}
+	free(inputcpy);
 	return (0);
 }
 
