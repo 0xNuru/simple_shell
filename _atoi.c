@@ -30,7 +30,7 @@ while (s[i])
 		if (num < INT_MIN || num > INT_MAX)
 			return (0);
 	}
- 	i++;
+	i++;
 }
 return (result);
 }
