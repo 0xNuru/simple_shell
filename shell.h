@@ -16,12 +16,6 @@
 
 extern char **environ;
 
-/* shell.c */
-void free_args(char **args);
-
-/* free_argv.c */
-void free_argv(char **args);
-
 /* mode.c */
 void interactive_sh(void);
 void non_interactive_sh(void);
