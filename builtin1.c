@@ -27,7 +27,7 @@ int __exit(char **args)
 			write(2, error, _strlen(error));
 			return (1);
 		}
-		status = atoi(args[1]);
+		status = _atoi(args[1]);
 		if (status == 0 && _strcmp(args[1], "0") != 0)
 		{
 			error = "invalid exit status\n";
