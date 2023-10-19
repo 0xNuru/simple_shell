@@ -46,9 +46,6 @@ char *_strcpy(char *dest, const char *src);
 /* Strings1.c */
 int _strncmp(const char *s1, const char *s2, size_t n);
 
-/* _atoi.c */
-int _atoi(char *s);
-
 /* _realloc.c */
 void *_realloc(void *ptr, size_t new_size);
 
@@ -61,12 +58,6 @@ int __env(char **args);
 int _setenv(const char *name, const char *value, int overwrite);
 int is_setenv(char **args);
 int _putenv(char *name_value);
-
-/* _fgetc.c */
-int _fgetc(FILE *stream);
-
-/* _fgets.c */
-char *_fgets(char *s, int n, FILE *stream);
 
 /* read_input.c */
 char *read_input(int *eof_status);
