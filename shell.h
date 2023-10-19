@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 #include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -44,6 +45,9 @@ char *_strcpy(char *dest, const char *src);
 
 /* Strings1.c */
 int _strncmp(const char *s1, const char *s2, size_t n);
+
+/* _atoi.c */
+int _atoi(char *s);
 
 /* _realloc.c */
 void *_realloc(void *ptr, size_t new_size);
